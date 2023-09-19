@@ -1,24 +1,26 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import './style.css';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+interface Todo {
+   title : string;
+   isCompleted : boolean;
+   readonly id : string;
+}
+const todos : Todo[] = []
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const TodoContainer  = document.querySelector('.todocontainer') as HTMLDivElement ;
+
+const Todoinput = document.getElementsByName('title')[0] as HTMLInputElement ;
+const myForm = document.getElementById('myForm') as HTMLFormElement ; 
+
+myForm.onsubmit = (e) => {
+  e.preventDefault(); 
+  const todo : Todo = {
+    title : Todoinput.value,
+    isCompleted : false,
+    id : String(Math.random() * 1000),
+  }
+  todos.push(todo);
+  Todoinput.value = '';
+  console.log(' To Do list is -',todo);
+
+}
