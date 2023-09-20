@@ -10,8 +10,6 @@ const todos : Todo[] = []
 const TodoContainer  = document.querySelector('.todocontainer') as HTMLDivElement ;
 
    const Todoinput = document.getElementById('input') as HTMLInputElement ; 
-
-  // const Todoinput = document.getElementsByName('title')[0] as HTMLInputElement ;
    console.log('Todoinput here -',Todoinput.value);
 
 const myForm = document.getElementById('myForm') as HTMLFormElement ; 
@@ -31,6 +29,7 @@ myForm.onsubmit = (e) => {
 
 }
 const renderTodo = (todos : Todo[]) => {
+    TodoContainer.innerText = "";
      todos.map((item) => {
         generateTodo(item.title,item.isCompleted,item.id);
      })
@@ -49,9 +48,17 @@ const  generateTodo = (title:string,isCompleted:boolean,id : string) => {
   const btn = document.createElement('button') as HTMLButtonElement ;
   btn.innerText = "X";
   btn.className = "deleteBtn"
+  btn.onclick = () => {
+     deletebtn(id);
+  }
 
   // append all to list and then to Main Container 
   todo.append(paragraph,btn);
   TodoContainer.append(todo);
+}
 
+const deletebtn = (id:string) => {
+     const idx = todos.findIndex((item) => item.id === id);
+     todos.splice(idx,1);
+     renderTodo(todos);
 }

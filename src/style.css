@@ -55,3 +55,9 @@
   gap: 1rem;
   align-items: center;
 }
+.todo{
+  width: 50%;
+  display: grid;
+  grid-template-columns: 7fr 1fr;
+  background-color: rgb(154, 167, 162);
+}
